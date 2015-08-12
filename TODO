@@ -1,0 +1,5 @@
+readme
+json scheme
+tags, caption, extractTags, extractCaptions
+tumblr post options support - slug, date, link, etc
+formatters for captions, tags, slug, date, link, etc
