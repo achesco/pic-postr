@@ -13,7 +13,9 @@
     "oauth": "^0.9.14",
     "vow": "^0.4.10",
     "vow-fs": "^0.3.4",
-    "tumblr.js": "^0.0.5"
+    "tumblr.js": "^0.0.5",
+    "fotki": "0.0.3",
+    "request": "2.67.0"
   },
   "repository": {
     "type": "git",
