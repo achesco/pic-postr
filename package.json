@@ -1,7 +1,7 @@
 {
   "name": "pic-postr",
-  "version": "0.2.0",
-  "description": "Pictures uploader tool for popular services",
+  "version": "0.3.0",
+  "description": "Pictures uploader tool for tumblr, flickr, yandex.fotki",
   "main": "lib/index.js",
   "dependencies": {
     "chokidar": "^1.0.5",
@@ -25,9 +25,13 @@
     "upload",
     "tumblr",
     "flickr",
+    "yandex",
+    "yandex.photos",
+    "fotki",
     "api",
     "post",
-    "posting"
+    "posting",
+    "client"
   ],
   "author": "Anton Lysenko <achesco@gmail.com> (http://antonlysenko.com/)",
   "license": "ISC",
