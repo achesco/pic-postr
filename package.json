@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "chokidar": "^1.0.5",
-    "extract-iptc": "^0.1.2",
+    "extract-iptc": "0.1.3",
     "basic-log": "^0.1.2",
     "imagemagick": "^0.1.3",
     "flickr-with-uploads": "^2.0.4",
