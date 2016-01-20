@@ -69,8 +69,10 @@ require('pic-postr').init('/base/folder', {
             title: function (filePath, metaIptc) {
                 return metaIptc.description;
             },
+            // more about metaIptc: https://github.com/achesco/extract-iptc 
             tags: function (filePath, metaIptc) {
-                return metaIptc.keywords ? metaIptc.keywords.split(';').join(' ') : null;
+                !metaIptc.keywords && return null;
+                return typeof meta.keywords === 'string' ? meta.keywords : meta.keywords.join(' '); // flickr requires white-space separated tags
             },
             is_public: 1
         }
