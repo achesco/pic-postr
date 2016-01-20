@@ -150,7 +150,7 @@ Application config object, possible fields are:
 | `accessSecret` | `String` | - | Service API OAuth access secret |
 | `interval` | `Number` | `60` | Time interval between posts for service, in seconds |
 | `order` | `String` | `'abc'` | Optional. Post files in given order (file name is used for sorting). Values: `'abc'`, `'zyx'`, `'random'` | 
-| `extractIptc` | `String` | `false` | Optional. Extract IPTC/XMP metadata to be used in [post's fields callbacks](#posts-fields-callbacks). [Metadata fields](https://github.com/achesco/extract-iptc#resulting-meta-object-fields-reference) |
+| `extractIptc` | `Boolean` | `false` | Optional. Extract IPTC/XMP metadata to be used in [post fields callbacks](#post-fields-callbacks).|
 | `post` | [`postConfigOptions`](#postconfigoptions) | N | Data object fields to post config |
 
 #### tumblrConfigOptions (Tumblr-only options)
@@ -167,7 +167,7 @@ Application config object, possible fields are:
 | `accessToken` | `String` | - | Service API OAuth access token |
 | `interval` | `Number` | `60` | Time interval between posts for service, in seconds |
 | `order` | `String` | `'abc'` | Optional. Post files in given order (file name is used for sorting). Values: `'abc'`, `'zyx'`, `'random'` |
-| `extractIptc` | `String` | `false` | Optional. Extract IPTC/XMP metadata to be used in [post's fields callbacks](#posts-fields-callbacks). [Metadata fields](https://github.com/achesco/extract-iptc#resulting-meta-object-fields-reference) |
+| `extractIptc` | `Boolean` | `false` | Optional. Extract IPTC/XMP metadata to be used in [post fields callbacks](#post-fields-callbacks).|
 | `album` | `String` | N | Album name to post to. Can be overriden with [`folderConfigOptions.album`](#folderconfigoptions) |
 | `post` | [`postConfigOptions`](#postconfigoptions) | N | Data object fields to post config |
 
@@ -202,3 +202,9 @@ Supported fields are: `title`, `description`, `tags`, `is_public`, `is_friend`, 
 
 Supported fields are: `title`, `summary`, `hide_original`, `xxx`, `disable_comments`, `access`, `tags`.
 [Description and possible values](https://tech.yandex.ru/fotki/doc/concepts/add-photo-docpage/#multipart-format)
+
+
+### Post fields callbacks
+
+If `metaIptc` set to `true` post fields options set to `function` will receive extracted IPTC metadata object 
+as second param (file path is first). [Metadata fields details](https://github.com/achesco/extract-iptc#resulting-meta-object-fields-reference)
