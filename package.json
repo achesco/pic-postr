@@ -1,6 +1,6 @@
 {
   "name": "pic-postr",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Pictures uploader tool for tumblr, flickr, yandex.fotki",
   "main": "lib/index.js",
   "dependencies": {
@@ -14,7 +14,7 @@
     "vow": "^0.4.10",
     "vow-fs": "^0.3.4",
     "tumblr.js": "^0.0.5",
-    "fotki": "0.0.3",
+    "fotki": "git://github.com/tadatuta/fotki.git#a96d0310876fe21fad84717fc1408b9444de16b4",
     "request": "2.67.0"
   },
   "repository": {
