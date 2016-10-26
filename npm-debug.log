@@ -1,0 +1,134 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/nvm/0.32.1/versions/node/v6.9.1/bin/node',
+1 verbose cli   '/usr/local/opt/nvm/versions/node/v6.9.1/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@3.10.8
+3 info using node@v6.9.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/chesco/workspace/pic-postr',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/chesco/.npm/pic-postr/0.3.4/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/chesco/.npm correctMkdir not in flight; initializing
+10 info lifecycle pic-postr@0.3.4~prepublish: pic-postr@0.3.4
+11 silly lifecycle pic-postr@0.3.4~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/chesco/.npm/pic-postr/0.3.4/package.tgz',
+12 verbose tar pack   '/Users/chesco/workspace/pic-postr' ]
+13 verbose tarball /Users/chesco/.npm/pic-postr/0.3.4/package.tgz
+14 verbose folder /Users/chesco/workspace/pic-postr
+15 verbose addLocalTarball adding from inside cache /Users/chesco/.npm/pic-postr/0.3.4/package.tgz
+16 verbose correctMkdir /Users/chesco/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd pic-postr@0.3.4
+18 verbose afterAdd /Users/chesco/.npm/pic-postr/0.3.4/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/chesco/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/chesco/.npm/pic-postr/0.3.4/package/package.json written
+21 silly publish { name: 'pic-postr',
+21 silly publish   version: '0.3.4',
+21 silly publish   description: 'Pictures uploader tool for tumblr, flickr, yandex.fotki',
+21 silly publish   main: 'lib/index.js',
+21 silly publish   dependencies:
+21 silly publish    { chokidar: '^1.0.5',
+21 silly publish      'extract-iptc': '0.1.3',
+21 silly publish      'basic-log': '^0.1.2',
+21 silly publish      imagemagick: '^0.1.3',
+21 silly publish      'flickr-with-uploads': '^2.0.4',
+21 silly publish      lodash: '^3.10.1',
+21 silly publish      oauth: '^0.9.14',
+21 silly publish      vow: '^0.4.10',
+21 silly publish      'vow-fs': '^0.3.4',
+21 silly publish      'tumblr.js': '^0.0.5',
+21 silly publish      fotki: 'git://github.com/tadatuta/fotki.git#a96d0310876fe21fad84717fc1408b9444de16b4',
+21 silly publish      request: '2.67.0' },
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/achesco/pic-postr.git' },
+21 silly publish   keywords:
+21 silly publish    [ 'upload',
+21 silly publish      'tumblr',
+21 silly publish      'flickr',
+21 silly publish      'yandex',
+21 silly publish      'yandex.photos',
+21 silly publish      'fotki',
+21 silly publish      'api',
+21 silly publish      'post',
+21 silly publish      'posting',
+21 silly publish      'client' ],
+21 silly publish   author:
+21 silly publish    { name: 'Anton Lysenko',
+21 silly publish      email: 'achesco@gmail.com',
+21 silly publish      url: 'http://antonlysenko.com/' },
+21 silly publish   license: 'ISC',
+21 silly publish   bugs: { url: 'https://github.com/achesco/pic-postr/issues' },
+21 silly publish   homepage: 'https://github.com/achesco/pic-postr#readme',
+21 silly publish   readme: '# pic-postr\n\nPictures uploader tool, supports [**tumblr**](https://www.tumblr.com), [**flickr**](https://www.flickr.com) and \n[**Yandex.Fotki**](https://fotki.yandex.ru/) (more services support to come). Uploads given pictures from \nconfigured folders and watches for new files being added to upload.\n\n## Installation\n\n`npm install pic-postr`\n\n## Authentication\n\nEach service requieres OAuth authentication to perform picures upload. This implies API keys retrieving process\ncompletion for pic-postr app with each service you desire to post to.\n\nTo accomplish this process, refer to servie\'s docs:\n\n### Get access with Tumblr\n* [Tumblr auto auth tool](https://github.com/achesco/tumblr-auto-auth)\n* [Docs](https://www.tumblr.com/docs/en/api/v2#what_you_need)\n\n### Get access with Flickr\n* [pic-postr](https://www.flickr.com/services/apps/72157660274442468/) in App Garden\n* [Docs](https://www.flickr.com/services/api/auth.oauth.html)\n\n### Get access with Yandex.Fotki\n* [Docs](https://tech.yandex.ru/fotki/doc/overview/authorization-docpage/)\n\n## Usage\n\nExample folders structure\n```\n/base/folder/\n    tumblr-drafts\n    tumblr-queue\n    flickr-public\n```\n\nFolders `tumblr-drafts`, `tumblr-queue` and `flickr-public` could contain some pictures at the run moment or files \ncould be added on the fly.    \n\nRunner script (`postr.js`):\n``` js\nrequire(\'pic-postr\').init(\'/base/folder\', {\n    logLevel: \'info\',\n    tumblr: {\n        appConsumerKey: \'...\',\n        appSecretKey: \'...\',\n        accessToken: \'...\',\n        accessSecret: \'...\',\n        interval: 30,\n        blog: \'the-blog\',\n        post: {\n            caption: \'Feel free to LIKE my photo\',\n            date: function (filePath) {\n                return new Date(require(\'fs\').statSync(filePath).ctime).toISOString()\n            }\n        }\n    },\n    flickr: {\n        appConsumerKey: \'...\',\n        appSecretKey: \'...\',\n        accessToken: \'...\',\n        accessSecret: \'...\',\n        interval: 10,\n        order: \'abc\',\n        extractIptc: true,\n        post: {\n            title: function (filePath, metaIptc) {\n                return metaIptc.description;\n            },\n            // more about metaIptc: https://github.com/achesco/extract-iptc \n            tags: function (filePath, metaIptc) {\n                !metaIptc.keywords && return null;\n                return typeof meta.keywords === \'string\' ? meta.keywords : meta.keywords.join(\' \'); // flickr requires white-space separated tags\n            },\n            is_public: 1\n        }\n    },\n    fotki: {\n        userName: \'yandex-login\',\n        accessToken: \'...\',\n        album: \'My Album Name\'\n    },\n    folders: {\n        \'tumblr-drafts\': {\n            service: \'tumblr\',\n            interval: 20,\n            order: \'abc\',\n            post: {\n                state: \'draft\'\n            }\n        },\n        \'tumblr-queue\': {\n            service: \'tumblr\',\n            order: \'random\',\n            post: {\n                state: \'queue\'\n            }\n        },\n        \'flickr-public\': {\n            service: \'flickr\'\n        },\n        \'to-fotki\': {\n            post: {\n                access: \'private\',\n                xxx: true\n            }\n        }\n    }\n});\n```\n\nAfter `node postr.js` execution we\'ll get main program running, posting and monitoring configured folders with given \nsettings by child processes. Could be run as a background service.\n\n```\nnode postr.js > postr.log 2>&1 &\n```\n\n## Options explained\n\n``` js\nrequire(\'pic-postr\').init(baseFolderPath, appConfigOptins);\n```\n\n### baseFolderPath\n\nString containing absolute or relative path to the base application folder. Base folder must contain images folders \nconfigured under the `folder` section of `appConfigOptions`.\n\n### appConfigOptions\n\nApplication config object, possible fields are:\n\n| Option | Type | Default | Description |\n|--------|------|---------|-------------|\n| `logLevel` | `String` | `\'warn\'` | Optional. Possible values are: `\'debug\'`, `\'info\'`, `\'warn\'`, `\'error\'` |\n| `imConvertPath` | `String` | `\'convert\'` | Optional. Path to imagemagick\'s convert utility, if not in PATH |\n| `tumblr` | [`tumblrConfigOptions`](#tumblrconfigoptions-and-flickrconfigoptions) | - | Config for Tumblr. Used for folders with `service: \'tumblr\'` |\n| `flickr` | [`flickrConfigOptions`](#tumblrconfigoptions-and-flickrconfigoptions) | - | Config for Flickr. Used for folders with `service: \'flickr\'` |\n| `fotki` | [`fotkiConfigOptions`](#fotkiconfigoptions) | - | Config for Yandex.Photos. Used for folders with `service: \'fotki\'` |\n| `folders` | `Object` | - | Object with keys matching picture folders inside `baseFolderPath` directory, values are: [`folderConfigOptions`](#folderconfigoptions) |\n\n### tumblrConfigOptions and flickrConfigOptions\n\n| Option | Type | Default | Description |\n|--------|------|---------|-------------|\n| `appConsumerKey` | `String` | - | Service API application consumer key for OAuth | \n| `appSecretKey` | `String` | - | Service API application secret key for OAuth | \n| `accessToken` | `String` | - | Service API OAuth access token | \n| `accessSecret` | `String` | - | Service API OAuth access secret |\n| `interval` | `Number` | `60` | Time interval between posts for service, in seconds |\n| `order` | `String` | `\'abc\'` | Optional. Post files in given order (file name is used for sorting). Values: `\'abc\'`, `\'zyx\'`, `\'random\'` | \n| `extractIptc` | `Boolean` | `false` | Optional. Extract IPTC/XMP metadata to be used in [post fields callbacks](#post-fields-callbacks).|\n| `post` | [`postConfigOptions`](#postconfigoptions) | N | Data object fields to post config |\n\n#### tumblrConfigOptions (Tumblr-only options)\n\n| Option | Type | Default | Description |\n|--------|------|---------|-------------|   \n| `blog` | `String` | N | Blog name to post to. Can be overriden with [`folderConfigOptions.blog`](#folderconfigoptions) |\n\n### fotkiConfigOptions\n\n| Option | Type | Default | Description |\n|--------|------|---------|-------------| \n| `userName` | `String` | - | Yandex login (without @yandex) | \n| `accessToken` | `String` | - | Service API OAuth access token |\n| `interval` | `Number` | `60` | Time interval between posts for service, in seconds |\n| `order` | `String` | `\'abc\'` | Optional. Post files in given order (file name is used for sorting). Values: `\'abc\'`, `\'zyx\'`, `\'random\'` |\n| `extractIptc` | `Boolean` | `false` | Optional. Extract IPTC/XMP metadata to be used in [post fields callbacks](#post-fields-callbacks).|\n| `album` | `String` | N | Album name to post to. Can be overriden with [`folderConfigOptions.album`](#folderconfigoptions) |\n| `post` | [`postConfigOptions`](#postconfigoptions) | N | Data object fields to post config |\n\n### folderConfigOptions\n\n| Option | Type | Default | Description |\n|--------|------|---------|-------------|\n| `service` | `String` | N | `\'tumblr\'`, `\'flickr\'` or `\'fotki\'` |\nPlus any of the following service-level config fields: `interval`, `order`, `extractIptc`, `post`;\n`blog` for tumblr-only and `album` for fotki may also be overriden on folder level.\n\n### postConfigOptions\n\nPost config options depend on service. Any supported field\'s config value could be set to function. It\'ll be called for\nevery time before posting picture file and should return fiel\'s value. Function arguments are:\n* `filePath` path to file being posted\n* `metaIptc` metadata parsed from image being posted. Requires `extractIptc` optinon set to `true`.\n\nReturn value should be service\'s API compatible value. Return `null` or `undefined` to ignore and use default instead.\n\n#### Tumblr\'s postConfigOptions\n\nSupported fields are: `state`, `tags`, `tweet`, `date`, `format`, `slug`, `caption`, `link`, `source`.\n[Description and possible values](https://www.tumblr.com/docs/en/api/v2#posting)\n\n#### Flickr\'s postConfigOptions\n\nSupported fields are: `title`, `description`, `tags`, `is_public`, `is_friend`, `is_family`, `safety_level`, `content_type`, `hidden`.\n[Description and possible values](https://www.flickr.com/services/api/upload.api.html)\n\n#### Fotki\'s postConfigOptions\n\nSupported fields are: `title`, `summary`, `hide_original`, `xxx`, `disable_comments`, `access`, `tags`.\n[Description and possible values](https://tech.yandex.ru/fotki/doc/concepts/add-photo-docpage/#multipart-format)\n\n\n### Post fields callbacks\n\nIf `metaIptc` set to `true` post fields options set to `function` will receive extracted IPTC metadata object \nas second param (file path is first). [Metadata fields details](https://github.com/achesco/extract-iptc#resulting-meta-object-fields-reference)\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '901667f0a7101c116ab12761c830471b69e4b5c5',
+21 silly publish   _id: 'pic-postr@0.3.4',
+21 silly publish   scripts: {},
+21 silly publish   _shasum: 'd2894087d6b8d76956fd387ca37d1e17127fe771',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name pic-postr
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry http://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'pic-postr',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'pic-postr',
+26 silly mapToRegistry   name: 'pic-postr',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri http://registry.npmjs.org/pic-postr
+28 verbose publish registryBase http://registry.npmjs.org/
+29 silly publish uploading /Users/chesco/.npm/pic-postr/0.3.4/package.tgz
+30 verbose request uri http://registry.npmjs.org/pic-postr
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 1:47:39 PM
+33 verbose request id b9fb512a6136b732
+34 http request PUT http://registry.npmjs.org/pic-postr
+35 http 403 http://registry.npmjs.org/pic-postr
+36 verbose headers { 'content-type': 'application/json',
+36 verbose headers   'cache-control': 'max-age=300',
+36 verbose headers   'content-length': '95',
+36 verbose headers   'accept-ranges': 'bytes',
+36 verbose headers   date: 'Wed, 26 Oct 2016 10:47:41 GMT',
+36 verbose headers   via: '1.1 varnish',
+36 verbose headers   connection: 'keep-alive',
+36 verbose headers   'x-served-by': 'cache-bma7022-BMA',
+36 verbose headers   'x-cache': 'MISS',
+36 verbose headers   'x-cache-hits': '0',
+36 verbose headers   'x-timer': 'S1477478859.995073,VS0,VE1578',
+36 verbose headers   vary: 'Accept-Encoding' }
+37 verbose request invalidating /Users/chesco/.npm/registry.npmjs.org/pic-postr on PUT
+38 error publish Failed PUT 403
+39 verbose stack Error: "You cannot publish over the previously published version 0.3.4." : pic-postr
+39 verbose stack     at makeError (/usr/local/Cellar/nvm/0.32.1/versions/node/v6.9.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:302:12)
+39 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/Cellar/nvm/0.32.1/versions/node/v6.9.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:290:14)
+39 verbose stack     at Request._callback (/usr/local/Cellar/nvm/0.32.1/versions/node/v6.9.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:210:14)
+39 verbose stack     at Request.self.callback (/usr/local/Cellar/nvm/0.32.1/versions/node/v6.9.1/lib/node_modules/npm/node_modules/request/request.js:187:22)
+39 verbose stack     at emitTwo (events.js:106:13)
+39 verbose stack     at Request.emit (events.js:191:7)
+39 verbose stack     at Request.<anonymous> (/usr/local/Cellar/nvm/0.32.1/versions/node/v6.9.1/lib/node_modules/npm/node_modules/request/request.js:1044:10)
+39 verbose stack     at emitOne (events.js:96:13)
+39 verbose stack     at Request.emit (events.js:188:7)
+39 verbose stack     at IncomingMessage.<anonymous> (/usr/local/Cellar/nvm/0.32.1/versions/node/v6.9.1/lib/node_modules/npm/node_modules/request/request.js:965:12)
+40 verbose statusCode 403
+41 verbose pkgid pic-postr
+42 verbose cwd /Users/chesco/workspace/pic-postr
+43 error Darwin 15.6.0
+44 error argv "/usr/local/Cellar/nvm/0.32.1/versions/node/v6.9.1/bin/node" "/usr/local/opt/nvm/versions/node/v6.9.1/bin/npm" "publish"
+45 error node v6.9.1
+46 error npm  v3.10.8
+47 error code E403
+48 error "You cannot publish over the previously published version 0.3.4." : pic-postr
+49 error If you need help, you may report this error at:
+49 error     <https://github.com/npm/npm/issues>
+50 verbose exit [ 1, true ]
